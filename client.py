@@ -26,7 +26,8 @@ def aplicar_ganho(g):
     S = len(g)
     g_com_ganho = g.copy()
     for l in range(1, S + 1):
-        gamma = 100 + (1/20) * np.sqrt(l * l)
+        fator = random.uniform(0.5, 2.0)  # aleatoriedade por elemento
+        gamma = (100 + (1/20) * np.sqrt(l * l)) * fator
         g_com_ganho[l-1] = g_com_ganho[l-1] * gamma
     return g_com_ganho
 
