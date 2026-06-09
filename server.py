@@ -3,12 +3,9 @@ import time
 from datetime import datetime
 from fastapi import FastAPI
 from pydantic import BaseModel
-from concurrent.futures import ProcessPoolExecutor
 
 app = FastAPI()
-executor = ProcessPoolExecutor(max_workers=8)
 
-# Carrega os dois H na memória ao iniciar o servidor
 H_map = {
     'H-1.csv': np.loadtxt('H/H-1.csv', delimiter=','),
     'H-2.csv': np.loadtxt('H/H-2.csv', delimiter=','),
@@ -51,19 +48,20 @@ def cgnr(H, g, max_iter=10, epsilon=1e-4):
     tempo = round(time.time() - inicio, 4)
     return f, iteracoes, tempo
 
-def processar(h_nome, sinal, nome):
-    H = np.loadtxt(f'H/{h_nome}', delimiter=',')
-    g = np.array(sinal)
+@app.post("/reconstruir")
+def reconstruir(req: Requisicao):
+    inicio_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    H = H_map[req.h]
+    g = np.array(req.sinal)
     tamanho = int(np.sqrt(H.shape[1]))
 
-    inicio_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     f, iteracoes, tempo = cgnr(H, g)
-    fim_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     imagem = f.reshape(tamanho, tamanho).T.tolist()
+    fim_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    return {
-        'nome': nome,
+    resultado = {
+        'nome': req.nome,
         'imagem': imagem,
         'iteracoes': iteracoes,
         'tempo': tempo,
@@ -72,12 +70,5 @@ def processar(h_nome, sinal, nome):
         'fim': fim_str,
     }
 
-@app.post("/reconstruir")
-async def reconstruir(req: Requisicao):
-    import asyncio
-    loop = asyncio.get_event_loop()
-    resultado = await loop.run_in_executor(executor, processar, req.h, req.sinal, req.nome)
-    
-    print(f"[{resultado['fim']}] {req.nome} — {resultado['iteracoes']} iterações — {resultado['tempo']}s")
-    
+    print(f"[{fim_str}] {req.nome} — {iteracoes} iterações — {tempo}s")
     return resultado

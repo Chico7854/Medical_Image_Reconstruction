@@ -2,3 +2,4 @@ venv/
 H/
 images/
 relatorio.json
+__pycache__/
