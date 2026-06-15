@@ -17,8 +17,6 @@ sinais = {
     'A-30x30-1.csv': 'H-2.csv',
 }
 
-c30 = np.linalg.norm()
-
 SERVIDOR = 'http://localhost:8000'
 relatorio = []
 

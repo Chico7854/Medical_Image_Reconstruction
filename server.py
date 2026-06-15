@@ -18,9 +18,9 @@ class Requisicao(BaseModel):
 
 def cgne(H, g, max_iter=10, epsilon=1e-4):
     inicio = time.time()
-    
+
     f = np.zeros(H.shape[1])
-    r = g - (H @ f)
+    r = g
     p = H.T @ r
 
     for i in range(max_iter):       
