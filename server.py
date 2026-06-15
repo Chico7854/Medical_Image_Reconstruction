@@ -16,6 +16,33 @@ class Requisicao(BaseModel):
     h: str
     nome: str
 
+def cgne(H, g, max_iter=10, epsilon=1e-4):
+    inicio = time.time()
+    
+    f = np.zeros(H.shape[1])
+    r = g - (H @ f)
+    p = H.T @ r
+
+    for i in range(max_iter):       
+        alpha = (r.T @ r) / (p.T @ p)
+        
+        f = f + alpha * p
+        r_novo = r - alpha * (H @ p)
+        
+        beta = (r_novo.T @ r_novo) / (r.T @ r)
+        
+        p = (H.T @ r_novo) + (beta * p)
+        
+        erro = np.linalg.norm(r_novo) - np.linalg.norm(r)
+        r = r_novo
+        iteracoes = i + 1
+
+        if erro < epsilon:
+            break
+
+    tempo = round(time.time() - inicio, 4)
+    return f, iteracoes, tempo
+
 def cgnr(H, g, max_iter=10, epsilon=1e-4):
     inicio = time.time()
     
@@ -46,6 +73,7 @@ def cgnr(H, g, max_iter=10, epsilon=1e-4):
             break
 
     tempo = round(time.time() - inicio, 4)
+    f = np.log(np.abs(f))
     return f, iteracoes, tempo
 
 @app.post("/reconstruir")
@@ -55,7 +83,7 @@ def reconstruir(req: Requisicao):
     g = np.array(req.sinal)
     tamanho = int(np.sqrt(H.shape[1]))
 
-    f, iteracoes, tempo = cgnr(H, g)
+    f, iteracoes, tempo = cgne(H, g)
 
     imagem = f.reshape(tamanho, tamanho).T.tolist()
     fim_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
