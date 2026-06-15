@@ -19,15 +19,17 @@ class Requisicao(BaseModel):
 def cgne(H, g, max_iter=10, epsilon=1e-4):
     inicio = time.time()
 
+    lambd = np.max(np.abs(H.T @ g)) * 0.10
+
     f = np.zeros(H.shape[1])
     r = g
     p = H.T @ r
 
     for i in range(max_iter):       
-        alpha = (r.T @ r) / (p.T @ p)
+        alpha = (r.T @ r) / ((p.T @ p) + lambd * (r.T @ r))
         
         f = f + alpha * p
-        r_novo = r - alpha * (H @ p)
+        r_novo = r - alpha * ((H @ p) + lambd * r)
         
         beta = (r_novo.T @ r_novo) / (r.T @ r)
         
@@ -41,6 +43,7 @@ def cgne(H, g, max_iter=10, epsilon=1e-4):
             break
 
     tempo = round(time.time() - inicio, 4)
+    f = np.log1p(np.abs(f))
     return f, iteracoes, tempo
 
 def cgnr(H, g, max_iter=10, epsilon=1e-4):
