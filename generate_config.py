@@ -29,7 +29,7 @@ for client in CLIENTS:
         nome_h = SINAIS_MAP[nome_g]
         
         # Randomize a unique delay value for this specific request
-        delay = round(random.uniform(0.5, 3.0), 2)
+        delay = round(random.uniform(0.2, 1.5), 2)
         
         client_tasks.append({
             "nome_g": nome_g,

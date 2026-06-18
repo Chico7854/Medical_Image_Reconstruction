@@ -1,169 +1,34 @@
 {
   "client_1": [
     {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.01
-    },
-    {
       "nome_g": "A-60x60-1.csv",
       "nome_h": "H-1.csv",
-      "delay": 2.57
+      "delay": 1.45
+    },
+    {
+      "nome_g": "G-2.csv",
+      "nome_h": "H-1.csv",
+      "delay": 1.3
     },
     {
       "nome_g": "g-30x30-1.csv",
       "nome_h": "H-2.csv",
-      "delay": 2.11
-    },
-    {
-      "nome_g": "A-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 0.63
-    },
-    {
-      "nome_g": "A-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 0.51
-    },
-    {
-      "nome_g": "G-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.32
+      "delay": 0.46
     },
     {
       "nome_g": "g-30x30-1.csv",
       "nome_h": "H-2.csv",
-      "delay": 1.36
-    },
-    {
-      "nome_g": "A-60x60-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.2
-    },
-    {
-      "nome_g": "g-30x30-2.csv",
-      "nome_h": "H-2.csv",
-      "delay": 1.83
-    },
-    {
-      "nome_g": "A-60x60-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.43
+      "delay": 0.73
     },
     {
       "nome_g": "G-1.csv",
       "nome_h": "H-1.csv",
-      "delay": 1.86
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.87
+      "delay": 0.49
     },
     {
       "nome_g": "g-30x30-1.csv",
       "nome_h": "H-2.csv",
-      "delay": 2.69
-    },
-    {
-      "nome_g": "A-60x60-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.66
-    },
-    {
-      "nome_g": "g-30x30-2.csv",
-      "nome_h": "H-2.csv",
-      "delay": 1.71
-    },
-    {
-      "nome_g": "A-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 0.51
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.99
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.28
-    },
-    {
-      "nome_g": "G-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 0.59
-    },
-    {
-      "nome_g": "A-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 2.57
-    },
-    {
-      "nome_g": "G-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.43
-    },
-    {
-      "nome_g": "g-30x30-2.csv",
-      "nome_h": "H-2.csv",
-      "delay": 1.05
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.0
-    },
-    {
-      "nome_g": "A-60x60-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.39
-    },
-    {
-      "nome_g": "G-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 0.76
-    },
-    {
-      "nome_g": "g-30x30-2.csv",
-      "nome_h": "H-2.csv",
-      "delay": 2.59
-    },
-    {
-      "nome_g": "A-60x60-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.84
-    },
-    {
-      "nome_g": "G-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 0.66
-    },
-    {
-      "nome_g": "A-60x60-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.23
-    },
-    {
-      "nome_g": "g-30x30-2.csv",
-      "nome_h": "H-2.csv",
-      "delay": 2.97
-    },
-    {
-      "nome_g": "G-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.28
-    },
-    {
-      "nome_g": "G-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.15
-    },
-    {
-      "nome_g": "A-60x60-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.22
+      "delay": 0.42
     },
     {
       "nome_g": "G-2.csv",
@@ -171,323 +36,9 @@
       "delay": 1.27
     },
     {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.22
-    },
-    {
-      "nome_g": "A-60x60-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 0.57
-    },
-    {
       "nome_g": "g-30x30-1.csv",
       "nome_h": "H-2.csv",
-      "delay": 1.87
-    },
-    {
-      "nome_g": "A-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 1.9
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.24
-    },
-    {
-      "nome_g": "A-60x60-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.79
-    },
-    {
-      "nome_g": "G-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.66
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.78
-    },
-    {
-      "nome_g": "G-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.62
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.78
-    },
-    {
-      "nome_g": "A-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 2.06
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.72
-    },
-    {
-      "nome_g": "A-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 1.63
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 0.69
-    },
-    {
-      "nome_g": "A-60x60-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.32
-    },
-    {
-      "nome_g": "g-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 1.45
-    }
-  ],
-  "client_2": [
-    {
-      "nome_g": "A-60x60-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 0.94
-    },
-    {
-      "nome_g": "A-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 2.89
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.57
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.82
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 0.58
-    },
-    {
-      "nome_g": "A-60x60-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.2
-    },
-    {
-      "nome_g": "A-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 1.72
-    },
-    {
-      "nome_g": "g-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 1.83
-    },
-    {
-      "nome_g": "g-30x30-2.csv",
-      "nome_h": "H-2.csv",
-      "delay": 0.8
-    },
-    {
-      "nome_g": "g-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 1.19
-    },
-    {
-      "nome_g": "A-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 2.11
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 0.95
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.47
-    },
-    {
-      "nome_g": "G-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 0.51
-    },
-    {
-      "nome_g": "A-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 2.03
-    },
-    {
-      "nome_g": "g-30x30-2.csv",
-      "nome_h": "H-2.csv",
-      "delay": 2.13
-    },
-    {
-      "nome_g": "g-30x30-2.csv",
-      "nome_h": "H-2.csv",
-      "delay": 1.5
-    },
-    {
-      "nome_g": "A-60x60-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.79
-    },
-    {
-      "nome_g": "A-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 2.68
-    },
-    {
-      "nome_g": "A-60x60-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.73
-    },
-    {
-      "nome_g": "A-60x60-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.47
-    },
-    {
-      "nome_g": "A-60x60-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.5
-    },
-    {
-      "nome_g": "A-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 1.39
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.42
-    },
-    {
-      "nome_g": "A-60x60-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.13
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.96
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.17
-    },
-    {
-      "nome_g": "G-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 0.78
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.16
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 0.56
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 0.78
-    },
-    {
-      "nome_g": "g-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 0.82
-    },
-    {
-      "nome_g": "A-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 2.76
-    },
-    {
-      "nome_g": "g-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 2.51
-    }
-  ],
-  "client_3": [
-    {
-      "nome_g": "A-60x60-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.34
-    },
-    {
-      "nome_g": "g-30x30-2.csv",
-      "nome_h": "H-2.csv",
-      "delay": 0.53
-    },
-    {
-      "nome_g": "g-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 2.55
-    },
-    {
-      "nome_g": "g-30x30-2.csv",
-      "nome_h": "H-2.csv",
-      "delay": 1.31
-    },
-    {
-      "nome_g": "A-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 1.96
-    },
-    {
-      "nome_g": "G-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.45
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.71
-    },
-    {
-      "nome_g": "A-60x60-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.82
-    },
-    {
-      "nome_g": "g-30x30-2.csv",
-      "nome_h": "H-2.csv",
-      "delay": 1.81
-    },
-    {
-      "nome_g": "g-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 1.7
-    },
-    {
-      "nome_g": "A-60x60-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.96
-    },
-    {
-      "nome_g": "A-60x60-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.44
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.67
+      "delay": 0.54
     },
     {
       "nome_g": "G-2.csv",
@@ -495,104 +46,129 @@
       "delay": 0.79
     },
     {
-      "nome_g": "g-30x30-2.csv",
-      "nome_h": "H-2.csv",
-      "delay": 2.88
+      "nome_g": "G-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.52
     },
     {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.58
+      "nome_g": "g-30x30-2.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.34
     },
     {
       "nome_g": "G-1.csv",
       "nome_h": "H-1.csv",
-      "delay": 2.98
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.91
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 0.83
-    },
-    {
-      "nome_g": "A-60x60-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.49
+      "delay": 1.09
     },
     {
       "nome_g": "g-30x30-2.csv",
       "nome_h": "H-2.csv",
-      "delay": 1.65
-    },
-    {
-      "nome_g": "A-60x60-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.75
+      "delay": 1.33
     },
     {
       "nome_g": "g-30x30-1.csv",
       "nome_h": "H-2.csv",
-      "delay": 1.67
+      "delay": 0.97
+    },
+    {
+      "nome_g": "A-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.38
     },
     {
       "nome_g": "g-30x30-1.csv",
       "nome_h": "H-2.csv",
-      "delay": 0.88
-    },
-    {
-      "nome_g": "G-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.1
-    },
-    {
-      "nome_g": "G-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.5
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 2.92
-    },
-    {
-      "nome_g": "A-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 1.35
+      "delay": 0.5
     },
     {
       "nome_g": "g-30x30-2.csv",
       "nome_h": "H-2.csv",
-      "delay": 0.65
+      "delay": 0.81
     },
     {
       "nome_g": "A-30x30-1.csv",
       "nome_h": "H-2.csv",
-      "delay": 1.48
-    },
-    {
-      "nome_g": "G-2.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.76
-    },
-    {
-      "nome_g": "G-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.2
+      "delay": 0.7
     },
     {
       "nome_g": "g-30x30-2.csv",
       "nome_h": "H-2.csv",
-      "delay": 2.29
+      "delay": 0.86
+    },
+    {
+      "nome_g": "g-30x30-2.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.97
     },
     {
       "nome_g": "G-1.csv",
       "nome_h": "H-1.csv",
-      "delay": 1.18
+      "delay": 1.28
+    },
+    {
+      "nome_g": "A-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 1.17
+    },
+    {
+      "nome_g": "G-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 1.13
+    },
+    {
+      "nome_g": "g-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.26
+    },
+    {
+      "nome_g": "G-2.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.49
+    },
+    {
+      "nome_g": "G-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.99
+    },
+    {
+      "nome_g": "g-30x30-2.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.93
+    },
+    {
+      "nome_g": "G-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.53
+    },
+    {
+      "nome_g": "G-2.csv",
+      "nome_h": "H-1.csv",
+      "delay": 1.03
+    },
+    {
+      "nome_g": "g-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.21
+    },
+    {
+      "nome_g": "g-30x30-2.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.42
+    },
+    {
+      "nome_g": "g-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.27
+    },
+    {
+      "nome_g": "g-30x30-2.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.28
+    },
+    {
+      "nome_g": "A-60x60-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.52
     },
     {
       "nome_g": "A-30x30-1.csv",
@@ -602,67 +178,426 @@
     {
       "nome_g": "g-30x30-1.csv",
       "nome_h": "H-2.csv",
-      "delay": 1.63
+      "delay": 0.98
     },
     {
-      "nome_g": "G-2.csv",
+      "nome_g": "G-1.csv",
       "nome_h": "H-1.csv",
-      "delay": 2.45
+      "delay": 0.59
     },
     {
       "nome_g": "A-60x60-1.csv",
       "nome_h": "H-1.csv",
-      "delay": 1.84
+      "delay": 1.26
+    }
+  ],
+  "client_2": [
+    {
+      "nome_g": "A-60x60-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.95
+    },
+    {
+      "nome_g": "g-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.94
+    },
+    {
+      "nome_g": "A-60x60-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.66
+    },
+    {
+      "nome_g": "g-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.41
+    },
+    {
+      "nome_g": "g-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.45
+    },
+    {
+      "nome_g": "G-2.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.29
     },
     {
       "nome_g": "g-30x30-2.csv",
       "nome_h": "H-2.csv",
-      "delay": 1.31
+      "delay": 1.13
+    },
+    {
+      "nome_g": "g-30x30-2.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.92
     },
     {
       "nome_g": "A-30x30-1.csv",
       "nome_h": "H-2.csv",
+      "delay": 0.74
+    },
+    {
+      "nome_g": "A-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.5
+    },
+    {
+      "nome_g": "g-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 1.37
+    },
+    {
+      "nome_g": "A-60x60-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.79
+    },
+    {
+      "nome_g": "g-30x30-2.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.55
+    },
+    {
+      "nome_g": "g-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 1.0
+    },
+    {
+      "nome_g": "G-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 1.2
+    },
+    {
+      "nome_g": "G-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 1.02
+    },
+    {
+      "nome_g": "A-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 1.32
+    },
+    {
+      "nome_g": "g-30x30-2.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.46
+    },
+    {
+      "nome_g": "A-60x60-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 1.03
+    },
+    {
+      "nome_g": "g-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 1.01
+    },
+    {
+      "nome_g": "G-2.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.31
+    },
+    {
+      "nome_g": "A-60x60-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.6
+    },
+    {
+      "nome_g": "A-60x60-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.62
+    },
+    {
+      "nome_g": "A-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.38
+    },
+    {
+      "nome_g": "A-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.7
+    },
+    {
+      "nome_g": "g-30x30-2.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.38
+    },
+    {
+      "nome_g": "A-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.76
+    },
+    {
+      "nome_g": "G-2.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.48
+    },
+    {
+      "nome_g": "G-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.8
+    },
+    {
+      "nome_g": "g-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 1.42
+    },
+    {
+      "nome_g": "g-30x30-2.csv",
+      "nome_h": "H-2.csv",
+      "delay": 1.18
+    },
+    {
+      "nome_g": "G-2.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.56
+    },
+    {
+      "nome_g": "G-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 1.21
+    },
+    {
+      "nome_g": "G-2.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.74
+    },
+    {
+      "nome_g": "A-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.2
+    },
+    {
+      "nome_g": "G-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.87
+    },
+    {
+      "nome_g": "A-60x60-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.82
+    },
+    {
+      "nome_g": "g-30x30-2.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.39
+    },
+    {
+      "nome_g": "g-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.48
+    }
+  ],
+  "client_3": [
+    {
+      "nome_g": "A-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 1.22
+    },
+    {
+      "nome_g": "g-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 1.15
+    },
+    {
+      "nome_g": "A-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.48
+    },
+    {
+      "nome_g": "G-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 1.48
+    },
+    {
+      "nome_g": "g-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 1.49
+    },
+    {
+      "nome_g": "A-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 1.2
+    },
+    {
+      "nome_g": "A-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.96
+    },
+    {
+      "nome_g": "g-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.33
+    },
+    {
+      "nome_g": "G-2.csv",
+      "nome_h": "H-1.csv",
+      "delay": 1.16
+    },
+    {
+      "nome_g": "A-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 1.2
+    },
+    {
+      "nome_g": "G-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.51
+    },
+    {
+      "nome_g": "g-30x30-2.csv",
+      "nome_h": "H-2.csv",
+      "delay": 1.16
+    },
+    {
+      "nome_g": "g-30x30-2.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.96
+    },
+    {
+      "nome_g": "A-60x60-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.58
+    },
+    {
+      "nome_g": "A-60x60-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.38
+    },
+    {
+      "nome_g": "g-30x30-2.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.74
+    },
+    {
+      "nome_g": "A-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.77
+    },
+    {
+      "nome_g": "A-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.97
+    },
+    {
+      "nome_g": "g-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 1.08
+    },
+    {
+      "nome_g": "G-2.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.55
+    },
+    {
+      "nome_g": "G-2.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.32
+    },
+    {
+      "nome_g": "g-30x30-2.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.25
+    },
+    {
+      "nome_g": "A-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 1.02
+    },
+    {
+      "nome_g": "G-2.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.88
+    },
+    {
+      "nome_g": "g-30x30-2.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.56
+    },
+    {
+      "nome_g": "g-30x30-1.csv",
+      "nome_h": "H-2.csv",
+      "delay": 0.98
+    },
+    {
+      "nome_g": "G-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.54
+    },
+    {
+      "nome_g": "G-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.41
+    },
+    {
+      "nome_g": "G-2.csv",
+      "nome_h": "H-1.csv",
+      "delay": 1.28
+    },
+    {
+      "nome_g": "G-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.37
+    },
+    {
+      "nome_g": "A-60x60-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.36
+    },
+    {
+      "nome_g": "G-2.csv",
+      "nome_h": "H-1.csv",
+      "delay": 1.02
+    },
+    {
+      "nome_g": "G-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.28
+    },
+    {
+      "nome_g": "G-2.csv",
+      "nome_h": "H-1.csv",
+      "delay": 0.45
+    },
+    {
+      "nome_g": "A-60x60-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 1.12
+    },
+    {
+      "nome_g": "g-30x30-2.csv",
+      "nome_h": "H-2.csv",
+      "delay": 1.21
+    },
+    {
+      "nome_g": "G-1.csv",
+      "nome_h": "H-1.csv",
       "delay": 0.72
     },
     {
       "nome_g": "g-30x30-2.csv",
       "nome_h": "H-2.csv",
-      "delay": 1.28
+      "delay": 0.46
     },
     {
-      "nome_g": "g-30x30-2.csv",
-      "nome_h": "H-2.csv",
-      "delay": 1.91
-    },
-    {
-      "nome_g": "G-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 0.74
-    },
-    {
-      "nome_g": "g-30x30-1.csv",
-      "nome_h": "H-2.csv",
-      "delay": 2.34
-    },
-    {
-      "nome_g": "G-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 1.57
-    },
-    {
-      "nome_g": "G-1.csv",
-      "nome_h": "H-1.csv",
-      "delay": 0.62
-    },
-    {
-      "nome_g": "G-1.csv",
+      "nome_g": "G-2.csv",
       "nome_h": "H-1.csv",
       "delay": 0.77
     },
     {
-      "nome_g": "g-30x30-1.csv",
+      "nome_g": "g-30x30-2.csv",
       "nome_h": "H-2.csv",
-      "delay": 2.83
+      "delay": 0.89
+    },
+    {
+      "nome_g": "A-60x60-1.csv",
+      "nome_h": "H-1.csv",
+      "delay": 1.34
+    },
+    {
+      "nome_g": "G-2.csv",
+      "nome_h": "H-1.csv",
+      "delay": 1.14
     }
   ]
 }

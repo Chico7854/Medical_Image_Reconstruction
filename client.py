@@ -5,17 +5,23 @@ import json
 import os
 import threading
 import random
-import matplotlib.pyplot as plt
 from datetime import datetime
+from matplotlib.figure import Figure
 
 SERVIDOR = 'http://localhost:8000'
 
 def salvar_imagem(imagem_lista, path):
     imagem = np.array(imagem_lista)
-    plt.imshow(imagem, cmap='gray')
-    plt.axis('off')
-    plt.savefig(path, bbox_inches='tight', pad_inches=0)
-    plt.close()
+    
+    # Create an isolated figure and axes instance (Thread-safe)
+    fig = Figure()
+    ax = fig.subplots()
+    
+    ax.imshow(imagem, cmap='gray')
+    ax.axis('off')
+    
+    # Save using the specific figure canvas instance
+    fig.savefig(path, bbox_inches='tight', pad_inches=0)
 
 def enviar_sinal(nome_g, nome_h, algoritmo, client_id):
     g = np.loadtxt("sinais/" + nome_g)
