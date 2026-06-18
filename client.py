@@ -7,7 +7,6 @@ import os
 import matplotlib.pyplot as plt
 from datetime import datetime
 
-# Mapeamento de sinais para o H correspondente
 sinais = {
     'G-1.csv':       'H-1.csv',
     'G-2.csv':       'H-1.csv',
@@ -26,24 +25,23 @@ def aplicar_ganho(g):
     S = len(g)
     g_com_ganho = g.copy()
     for l in range(1, S + 1):
-        fator = random.uniform(0.5, 2.0)  # aleatoriedade por elemento
+        fator = random.uniform(1.0, 3.0)
         gamma = (100 + (1/20) * l * np.sqrt(l)) * fator
         g_com_ganho[l-1] = g_com_ganho[l-1] * gamma
     return g_com_ganho
 
 def salvar_imagem(imagem_lista, path):
     imagem = np.array(imagem_lista)
-    imagem_norm = (imagem - imagem.min()) / (imagem.max() - imagem.min())
-    imagem_real = np.exp(imagem_norm)
-    plt.imshow(imagem_real, cmap='gray')
+    
+    # Avoid transform conflict; allow matplotlib to handle native scale mapping
+    plt.imshow(imagem, cmap='gray')
     plt.axis('off')
     plt.savefig(path, bbox_inches='tight', pad_inches=0)
     plt.close()
 
 def enviar_sinal(nome_g, nome_h, algoritmo):
     g = np.loadtxt("sinais/" + nome_g)
-
-    g = aplicar_ganho(g)
+    #g = aplicar_ganho(g)
 
     payload = {
         'sinal': g.tolist(),
@@ -54,10 +52,8 @@ def enviar_sinal(nome_g, nome_h, algoritmo):
     
     print(f"[{datetime.now()}] Enviando {nome_g} com {nome_h}...")
     resposta = requests.post(f"{SERVIDOR}/reconstruir", json=payload)
-    
     return resposta.json()
 
-# Loop principal — envia sinais em ordem
 try:
     for nome_g, nome_h in sinais.items():
         resultado = enviar_sinal(nome_g, nome_h, 'cgne')
