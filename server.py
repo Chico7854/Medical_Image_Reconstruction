@@ -15,6 +15,7 @@ class Requisicao(BaseModel):
     sinal: list
     h: str
     nome: str
+    algoritmo: str
 
 def cgne(H, g, max_iter=10, epsilon=1e-4):
     inicio = time.time()
@@ -52,7 +53,7 @@ def cgnr(H, g, max_iter=10, epsilon=1e-4):
     lambd = np.max(np.abs(H.T @ g)) * 0.10
     
     f = np.zeros(H.shape[1])
-    r = g.copy()
+    r = g - H @ f
     z = H.T @ r
     p = z.copy()
 
@@ -87,8 +88,12 @@ def reconstruir(req: Requisicao):
     H = H_map[req.h]
     g = np.array(req.sinal)
     tamanho = int(np.sqrt(H.shape[1]))
+    algoritmo = req.algoritmo
 
-    f, iteracoes, tempo = cgnr(H, g)
+    if (algoritmo == 'cgne'):
+        f, iteracoes, tempo = cgne(H, g)
+    else:    
+        f, iteracoes, tempo = cgnr(H, g)
 
     imagem = f.reshape(tamanho, tamanho).T.tolist()
     fim_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -101,6 +106,7 @@ def reconstruir(req: Requisicao):
         'tamanho': f"{tamanho}x{tamanho}",
         'inicio': inicio_str,
         'fim': fim_str,
+        'algoritmo': algoritmo
     }
 
     print(f"[{fim_str}] {req.nome} — {iteracoes} iterações — {tempo}s")

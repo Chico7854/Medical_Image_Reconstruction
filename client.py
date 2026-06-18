@@ -40,7 +40,7 @@ def salvar_imagem(imagem_lista, path):
     plt.savefig(path, bbox_inches='tight', pad_inches=0)
     plt.close()
 
-def enviar_sinal(nome_g, nome_h):
+def enviar_sinal(nome_g, nome_h, algoritmo):
     g = np.loadtxt("sinais/" + nome_g)
 
     g = aplicar_ganho(g)
@@ -49,6 +49,7 @@ def enviar_sinal(nome_g, nome_h):
         'sinal': g.tolist(),
         'h': nome_h,
         'nome': nome_g,
+        'algoritmo': algoritmo
     }
     
     print(f"[{datetime.now()}] Enviando {nome_g} com {nome_h}...")
@@ -59,7 +60,7 @@ def enviar_sinal(nome_g, nome_h):
 # Loop principal — envia sinais em ordem
 try:
     for nome_g, nome_h in sinais.items():
-        resultado = enviar_sinal(nome_g, nome_h)
+        resultado = enviar_sinal(nome_g, nome_h, 'cgne')
         
         path = f"images/{nome_g.replace('.csv', '')}.png"
         salvar_imagem(resultado['imagem'], path)
@@ -73,6 +74,7 @@ try:
             'inicio': resultado['inicio'],
             'fim': resultado['fim'],
             'h_usado': nome_h,
+            'algoritmo': resultado['algoritmo']
         })
         
         print(f"  → H usado: {nome_h}")
