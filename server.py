@@ -22,7 +22,7 @@ def cgne(H, g, max_iter=10, epsilon=1e-4):
     lambd = np.max(np.abs(H.T @ g)) * 0.10
 
     f = np.zeros(H.shape[1])
-    r = g
+    r = g.copy()
     p = H.T @ r
 
     for i in range(max_iter):       
@@ -35,7 +35,7 @@ def cgne(H, g, max_iter=10, epsilon=1e-4):
         
         p = (H.T @ r_novo) + (beta * p)
         
-        erro = np.linalg.norm(r_novo) - np.linalg.norm(r)
+        erro = abs(np.linalg.norm(r_novo) - np.linalg.norm(r))
         r = r_novo
         iteracoes = i + 1
 
@@ -48,25 +48,27 @@ def cgne(H, g, max_iter=10, epsilon=1e-4):
 
 def cgnr(H, g, max_iter=10, epsilon=1e-4):
     inicio = time.time()
+
+    lambd = np.max(np.abs(H.T @ g)) * 0.10
     
     f = np.zeros(H.shape[1])
-    r = g - H @ f
+    r = g.copy()
     z = H.T @ r
     p = z.copy()
 
     iteracoes = 0
     for i in range(max_iter):
         w = H @ p
-        alpha = (z @ z) / (w @ w)
+        alpha = (z @ z) / ((w @ w) + lambd * (p @ p))
         
         f = f + alpha * p
-        r_novo = r - alpha * w
+        r_novo = r - alpha * w - lambd * alpha * (H @ f)
         z_novo = H.T @ r_novo
         
         beta = (z_novo @ z_novo) / (z @ z)
         p = z_novo + beta * p
         
-        erro = abs((r_novo @ r_novo) - (r @ r)) / (r @ r)
+        erro = abs(np.linalg.norm(r_novo) - np.linalg.norm(r))
         
         r = r_novo
         z = z_novo
@@ -76,7 +78,7 @@ def cgnr(H, g, max_iter=10, epsilon=1e-4):
             break
 
     tempo = round(time.time() - inicio, 4)
-    f = np.log(np.abs(f))
+    f = np.log1p(np.abs(f))
     return f, iteracoes, tempo
 
 @app.post("/reconstruir")
@@ -86,7 +88,7 @@ def reconstruir(req: Requisicao):
     g = np.array(req.sinal)
     tamanho = int(np.sqrt(H.shape[1]))
 
-    f, iteracoes, tempo = cgne(H, g)
+    f, iteracoes, tempo = cgnr(H, g)
 
     imagem = f.reshape(tamanho, tamanho).T.tolist()
     fim_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
