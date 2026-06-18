@@ -17,74 +17,65 @@ sinais = {
 }
 
 SERVIDOR = 'http://localhost:8000'
-relatorio = []
-
 os.makedirs('images', exist_ok=True)
-
-def aplicar_ganho(g):
-    S = len(g)
-    g_com_ganho = g.copy()
-    for l in range(1, S + 1):
-        fator = random.uniform(1.0, 3.0)
-        gamma = (100 + (1/20) * l * np.sqrt(l)) * fator
-        g_com_ganho[l-1] = g_com_ganho[l-1] * gamma
-    return g_com_ganho
+relatorio = []
 
 def salvar_imagem(imagem_lista, path):
     imagem = np.array(imagem_lista)
-    
-    # Avoid transform conflict; allow matplotlib to handle native scale mapping
     plt.imshow(imagem, cmap='gray')
     plt.axis('off')
     plt.savefig(path, bbox_inches='tight', pad_inches=0)
     plt.close()
 
-def enviar_sinal(nome_g, nome_h, algoritmo):
+def enviar_sinal(nome_g, nome_h, algoritmo, e_ultimo):
     g = np.loadtxt("sinais/" + nome_g)
-    #g = aplicar_ganho(g)
-
     payload = {
         'sinal': g.tolist(),
         'h': nome_h,
         'nome': nome_g,
-        'algoritmo': algoritmo
+        'algoritmo': algoritmo,
+        'e_ultimo': e_ultimo
     }
-    
-    print(f"[{datetime.now()}] Enviando {nome_g} com {nome_h}...")
+    print(f"[{datetime.now()}] Enviando {nome_g}...")
     resposta = requests.post(f"{SERVIDOR}/reconstruir", json=payload)
     return resposta.json()
 
 try:
-    for nome_g, nome_h in sinais.items():
-        resultado = enviar_sinal(nome_g, nome_h, 'cgne')
-        
-        path = f"images/{nome_g.replace('.csv', '')}.png"
-        salvar_imagem(resultado['imagem'], path)
+    itens = list(sinais.items())
+    total = len(itens)
 
-        relatorio.append({
-            'nome': resultado['nome'],
-            'imagem': path,
-            'iteracoes': resultado['iteracoes'],
-            'tempo': resultado['tempo'],
-            'tamanho': resultado['tamanho'],
-            'inicio': resultado['inicio'],
-            'fim': resultado['fim'],
-            'h_usado': nome_h,
-            'algoritmo': resultado['algoritmo']
-        })
+    # 1. Send all data immediately
+    for idx, (nome_g, nome_h) in enumerate(itens):
+        e_ultimo = (idx == total - 1)
+        enviar_sinal(nome_g, nome_h, 'cgnr', e_ultimo)
         
-        print(f"  → H usado: {nome_h}")
-        print(f"  → Imagem salva em {path}")
-        print(f"  → Iterações: {resultado['iteracoes']}")
-        print(f"  → Tempo: {resultado['tempo']}s")
-        
-        intervalo = random.uniform(1, 5)
-        print(f"  → Próximo envio em {intervalo:.1f}s\n")
-        time.sleep(intervalo)
+        if not e_ultimo:
+            intervalo = random.uniform(0.5, 1.5)
+            time.sleep(intervalo)
 
-    print("\nTodos os sinais enviados!")
+    # 2. Start listening for the processing pipeline to complete
+    print("\n[CLIENT] Todos os sinais enviados. Aguardando servidor finalizar o processamento...")
+    resposta_servidor = requests.get(f"{SERVIDOR}/resultados").json()
+
+    # 3. Process the downloaded payload bundle
+    if resposta_servidor.get("status") == "sucesso":
+        for resultado in resposta_servidor["dados"]:
+            path = f"images/{resultado['nome'].replace('.csv', '')}.png"
+            salvar_imagem(resultado['imagem'], path)
+
+            relatorio.append({
+                'nome': resultado['nome'],
+                'imagem': path,
+                'iteracoes': resultado['iteracoes'],
+                'tempo': resultado['tempo'],
+                'tamanho': resultado['tamanho'],
+                'inicio': resultado['inicio'],
+                'fim': resultado['fim'],
+                'algoritmo': resultado['algoritmo']
+            })
+            print(f"  → Processado remoto: {resultado['nome']} ({resultado['tempo']}s) | Salvo em {path}")
 
 finally:
     with open('relatorio.json', 'w') as f:
         json.dump(relatorio, f, indent=2)
-    print(f"Relatório salvo com {len(relatorio)} reconstruções.")
+    print(f"\n[CLIENT] Relatório final criado com {len(relatorio)} itens.")
