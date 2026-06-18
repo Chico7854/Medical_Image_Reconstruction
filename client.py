@@ -4,6 +4,7 @@ import time
 import json
 import os
 import threading
+import random
 import matplotlib.pyplot as plt
 from datetime import datetime
 
@@ -42,8 +43,11 @@ def executar_pipeline_cliente(client_id, tasks):
         nome_h = task["nome_h"]
         delay = task["delay"]
         
-        print(f"[{client_id}] (Progress {idx+1}/{total}) Sending {nome_g}...")
-        enviar_sinal(nome_g, nome_h, 'cgnr', client_id)
+        # Dynamically randomize the algorithm per request
+        algoritmo = random.choice(['cgne', 'cgnr'])
+        
+        print(f"[{client_id}] (Progress {idx+1}/{total}) Sending {nome_g} via {algoritmo.upper()}...")
+        enviar_sinal(nome_g, nome_h, algoritmo, client_id)
         time.sleep(delay)
 
     # 2. Long polling loop waiting for back-end processing
@@ -74,7 +78,6 @@ def executar_pipeline_cliente(client_id, tasks):
 
 
 if __name__ == "__main__":
-    # Load tasks configuration blueprint
     if not os.path.exists('config.json'):
         print("Error: config.json not found. Run generate_config.py first.")
         exit(1)
@@ -84,13 +87,11 @@ if __name__ == "__main__":
 
     threads = []
     
-    # Spawn fixed threads matching the config keys
     for client_id, tasks in config_total.items():
         t = threading.Thread(target=executar_pipeline_cliente, args=(client_id, tasks))
         threads.append(t)
         t.start()
 
-    # Wait for all 3 clients to finish their download processes
     for t in threads:
         t.join()
 
