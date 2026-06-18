@@ -1,24 +1,13 @@
 import numpy as np
 import requests
-import random
 import time
 import json
 import os
+import threading
 import matplotlib.pyplot as plt
 from datetime import datetime
 
-sinais = {
-    'G-1.csv':       'H-1.csv',
-    'G-2.csv':       'H-1.csv',
-    'A-60x60-1.csv': 'H-1.csv',
-    'g-30x30-1.csv': 'H-2.csv',
-    'g-30x30-2.csv': 'H-2.csv',
-    'A-30x30-1.csv': 'H-2.csv',
-}
-
 SERVIDOR = 'http://localhost:8000'
-os.makedirs('images', exist_ok=True)
-relatorio = []
 
 def salvar_imagem(imagem_lista, path):
     imagem = np.array(imagem_lista)
@@ -27,40 +16,44 @@ def salvar_imagem(imagem_lista, path):
     plt.savefig(path, bbox_inches='tight', pad_inches=0)
     plt.close()
 
-def enviar_sinal(nome_g, nome_h, algoritmo, e_ultimo):
+def enviar_sinal(nome_g, nome_h, algoritmo, client_id):
     g = np.loadtxt("sinais/" + nome_g)
     payload = {
         'sinal': g.tolist(),
         'h': nome_h,
         'nome': nome_g,
         'algoritmo': algoritmo,
-        'e_ultimo': e_ultimo
+        'client_id': client_id
     }
-    print(f"[{datetime.now()}] Enviando {nome_g}...")
     resposta = requests.post(f"{SERVIDOR}/reconstruir", json=payload)
     return resposta.json()
 
-try:
-    itens = list(sinais.items())
-    total = len(itens)
-
-    # 1. Send all data immediately
-    for idx, (nome_g, nome_h) in enumerate(itens):
-        e_ultimo = (idx == total - 1)
-        enviar_sinal(nome_g, nome_h, 'cgnr', e_ultimo)
+def executar_pipeline_cliente(client_id, tasks):
+    output_dir = f"images_{client_id}"
+    os.makedirs(output_dir, exist_ok=True)
+    relatorio = []
+    total = len(tasks)
+    
+    print(f"[{client_id}] Starting thread. Total tasks: {total}\n")
+    
+    # 1. Fire-and-forget loop
+    for idx, task in enumerate(tasks):
+        nome_g = task["nome_g"]
+        nome_h = task["nome_h"]
+        delay = task["delay"]
         
-        if not e_ultimo:
-            intervalo = random.uniform(0.5, 1.5)
-            time.sleep(intervalo)
+        print(f"[{client_id}] (Progress {idx+1}/{total}) Sending {nome_g}...")
+        enviar_sinal(nome_g, nome_h, 'cgnr', client_id)
+        time.sleep(delay)
 
-    # 2. Start listening for the processing pipeline to complete
-    print("\n[CLIENT] Todos os sinais enviados. Aguardando servidor finalizar o processamento...")
-    resposta_servidor = requests.get(f"{SERVIDOR}/resultados").json()
+    # 2. Long polling loop waiting for back-end processing
+    print(f"\n[{client_id}] Queue processed. Waiting for server computations...")
+    resposta_servidor = requests.get(f"{SERVIDOR}/resultados/{client_id}").json()
 
-    # 3. Process the downloaded payload bundle
+    # 3. Extract completed matrices
     if resposta_servidor.get("status") == "sucesso":
-        for resultado in resposta_servidor["dados"]:
-            path = f"images/{resultado['nome'].replace('.csv', '')}.png"
+        for idx, resultado in enumerate(resposta_servidor["dados"]):
+            path = f"{output_dir}/{idx:02d}_{resultado['nome'].replace('.csv', '')}.png"
             salvar_imagem(resultado['imagem'], path)
 
             relatorio.append({
@@ -73,9 +66,32 @@ try:
                 'fim': resultado['fim'],
                 'algoritmo': resultado['algoritmo']
             })
-            print(f"  → Processado remoto: {resultado['nome']} ({resultado['tempo']}s) | Salvo em {path}")
+        print(f"[{client_id}] Finished completely. Outputs written to ./{output_dir}")
 
-finally:
-    with open('relatorio.json', 'w') as f:
+    # Write report file specific to this thread
+    with open(f'relatorio_{client_id}.json', 'w') as f:
         json.dump(relatorio, f, indent=2)
-    print(f"\n[CLIENT] Relatório final criado com {len(relatorio)} itens.")
+
+
+if __name__ == "__main__":
+    # Load tasks configuration blueprint
+    if not os.path.exists('config.json'):
+        print("Error: config.json not found. Run generate_config.py first.")
+        exit(1)
+        
+    with open('config.json', 'r') as f:
+        config_total = json.load(f)
+
+    threads = []
+    
+    # Spawn fixed threads matching the config keys
+    for client_id, tasks in config_total.items():
+        t = threading.Thread(target=executar_pipeline_cliente, args=(client_id, tasks))
+        threads.append(t)
+        t.start()
+
+    # Wait for all 3 clients to finish their download processes
+    for t in threads:
+        t.join()
+
+    print("\n[MAIN] All 3 client worker threads completed execution.")

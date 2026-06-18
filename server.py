@@ -14,18 +14,21 @@ H_map = {
     'H-2.csv': np.loadtxt('H/H-2.csv', delimiter=','),
 }
 
-# In-memory storage for results indexed by a session or client run
-# In production, use a unique session ID per client
-resultados_storage: List[dict] = []
+# Session-based storage: { "client_1": [...], "client_2": [...] }
+resultados_storage: Dict[str, List[dict]] = {}
+
+# Active background task tracking per client: { "client_1": 0, "client_2": 0 }
+processando_count: Dict[str, int] = {}
+storage_lock = asyncio.Lock()
 
 class Requisicao(BaseModel):
     sinal: list
     h: str
     nome: str
     algoritmo: str
-    e_ultimo: bool  # Flag indicating the last payload
+    client_id: str  # Tracks which client sent the data
 
-# (cgne and cgnr functions remain exactly the same as your original code)
+# (cgne and cgnr functions remain unchanged)
 def cgne(H, g, max_iter=100, epsilon=1e-4):
     inicio = time.time()
     lambd = np.max(np.abs(H.T @ g)) * 0.10
@@ -68,21 +71,16 @@ def cgnr(H, g, max_iter=100, epsilon=1e-4):
     tempo = round(time.time() - inicio, 4)
     return np.abs(f), iteracoes, tempo
 
-# Global counter to track active background tasks
-processando_count = 0
-processando_lock = asyncio.Lock()
-
-def processar_reconstrucao_background(req: Requisicao):
-    global processando_count
+async def processar_reconstrucao_background(req: Requisicao):
     inicio_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     H = H_map[req.h]
     g = np.array(req.sinal)
     tamanho = int(np.sqrt(H.shape[1]))
     
     if req.algoritmo == 'cgne':
-        f, iteracoes, tempo = cgne(H, g)
+        f, iteracoes, tempo = await asyncio.to_thread(cgne, H, g)
     else:    
-        f, iteracoes, tempo = cgnr(H, g)
+        f, iteracoes, tempo = await asyncio.to_thread(cgnr, H, g)
 
     imagem = f.reshape(tamanho, tamanho).T.tolist()
     fim_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -98,41 +96,39 @@ def processar_reconstrucao_background(req: Requisicao):
         'algoritmo': req.algoritmo
     }
     
-    resultados_storage.append(resultado)
-    print(f"[BACKGROUND] Processado {req.nome}")
-
-    # Decrement active task counter safely
-    async def sub_counter():
-        global processando_count
-        async with processando_lock:
-            processando_count -= 1
-            
-    asyncio.run(sub_counter())
+    async with storage_lock:
+        if req.client_id not in resultados_storage:
+            resultados_storage[req.client_id] = []
+        resultados_storage[req.client_id].append(resultado)
+        processando_count[req.client_id] -= 1
+        
+    print(f"[BACKGROUND] Processado {req.nome} para {req.client_id}")
 
 @app.post("/reconstruir")
 async def reconstruir(req: Requisicao, background_tasks: BackgroundTasks):
-    global processando_count
-    async with processando_lock:
-        processando_count += 1
+    async with storage_lock:
+        if req.client_id not in processando_count:
+            processando_count[req.client_id] = 0
+        processando_count[req.client_id] += 1
         
-    # Trigger execution in background thread without waiting
     background_tasks.add_task(processar_reconstrucao_background, req)
-    
-    return {"status": "recebido", "e_ultimo": req.e_ultimo}
+    return {"status": "recebido"}
 
-@app.get("/resultados")
-async def obter_resultados():
-    global processando_count
-    # Long poll loop: Wait until all processing is complete and we have results
+@app.get("/resultados/{client_id}")
+async def obter_resultados(client_id: str):
     while True:
-        async with processando_lock:
-            if processando_count == 0 and len(resultados_storage) > 0:
-                break
+        async with storage_lock:
+            # Check if client has finished sending and server finished processing
+            if client_id in processando_count and processando_count[client_id] == 0:
+                if client_id in resultados_storage and len(resultados_storage[client_id]) > 0:
+                    break
         await asyncio.sleep(0.5)
         
-    # Clear and extract results
-    resposta = list(resultados_storage)
-    resultados_storage.clear()
+    async with storage_lock:
+        resposta = list(resultados_storage[client_id])
+        del resultados_storage[client_id]
+        del processando_count[client_id]
+        
     return {"status": "sucesso", "dados": resposta}
 
 if __name__ == "__main__":

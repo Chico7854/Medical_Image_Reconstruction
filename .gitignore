@@ -1,5 +1,9 @@
 venv/
 H/
-images/
-relatorio.json
+images_client_1/
+images_client_2/
+images_client_3/
+relatorio_client_1.json
+relatorio_client_2.json
+relatorio_client_3.json
 __pycache__/
