@@ -1,6 +1,10 @@
 import numpy as np
 import time
 import asyncio
+import threading
+import psutil
+import csv
+import os
 from datetime import datetime
 from fastapi import FastAPI, BackgroundTasks
 from pydantic import BaseModel
@@ -14,10 +18,7 @@ H_map = {
     'H-2.csv': np.loadtxt('H/H-2.csv', delimiter=','),
 }
 
-# Session-based storage: { "client_1": [...], "client_2": [...] }
 resultados_storage: Dict[str, List[dict]] = {}
-
-# Active background task tracking per client: { "client_1": 0, "client_2": 0 }
 processando_count: Dict[str, int] = {}
 storage_lock = asyncio.Lock()
 
@@ -26,9 +27,47 @@ class Requisicao(BaseModel):
     h: str
     nome: str
     algoritmo: str
-    client_id: str  # Tracks which client sent the data
+    client_id: str
 
-# (cgne and cgnr functions remain unchanged)
+# --- BACKGROUND MONITORING ---
+METRICS_FILE = "metrics.csv"
+
+def monitorar_recursos():
+    """Background thread that samples CPU/Memory at a fast interval."""
+    pid = os.getpid()
+    processo = psutil.Process(pid)
+    
+    # Initialize CSV file with headers
+    with open(METRICS_FILE, mode='w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow([
+            "Timestamp", 
+            "System_Total_CPU_Percent", 
+            "System_Used_Memory_GB"
+        ])
+    
+    while True:
+        try:
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+            
+            # Global system metrics
+            sys_cpu = psutil.cpu_percent()
+            sys_mem = psutil.virtual_memory().used / (1024 * 1024 * 1024)  # Convert to GB
+            
+            with open(METRICS_FILE, mode='a', newline='') as f:
+                writer = csv.writer(f)
+                writer.writerow([timestamp, sys_cpu, round(sys_mem, 2)])
+                
+            time.sleep(0.5)  # High resolution sampling
+        except Exception as e:
+            print(f"[MONITOR ERROR] {e}")
+            time.sleep(1)
+
+# Start the monitoring thread immediately on server startup
+monitor_thread = threading.Thread(target=monitorar_recursos, daemon=True)
+monitor_thread.start()
+# -----------------------------
+
 def cgne(H, g, max_iter=100, epsilon=1e-4):
     inicio = time.time()
     lambd = np.max(np.abs(H.T @ g)) * 0.10
@@ -118,7 +157,6 @@ async def reconstruir(req: Requisicao, background_tasks: BackgroundTasks):
 async def obter_resultados(client_id: str):
     while True:
         async with storage_lock:
-            # Check if client has finished sending and server finished processing
             if client_id in processando_count and processando_count[client_id] == 0:
                 if client_id in resultados_storage and len(resultados_storage[client_id]) > 0:
                     break
