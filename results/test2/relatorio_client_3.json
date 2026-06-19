@@ -1,0 +1,382 @@
+[
+  {
+    "nome": "g-30x30-2.csv",
+    "imagem": "images_client_3/00_g-30x30-2.png",
+    "iteracoes": 2,
+    "tempo": 0.2029,
+    "tamanho": "30x30",
+    "inicio": "2026-06-19 15:13:04",
+    "fim": "2026-06-19 15:13:04",
+    "algoritmo": "cgnr"
+  },
+  {
+    "nome": "A-30x30-1.csv",
+    "imagem": "images_client_3/01_A-30x30-1.png",
+    "iteracoes": 3,
+    "tempo": 0.3308,
+    "tamanho": "30x30",
+    "inicio": "2026-06-19 15:13:04",
+    "fim": "2026-06-19 15:13:05",
+    "algoritmo": "cgne"
+  },
+  {
+    "nome": "g-30x30-1.csv",
+    "imagem": "images_client_3/02_g-30x30-1.png",
+    "iteracoes": 2,
+    "tempo": 0.3016,
+    "tamanho": "30x30",
+    "inicio": "2026-06-19 15:13:05",
+    "fim": "2026-06-19 15:13:06",
+    "algoritmo": "cgnr"
+  },
+  {
+    "nome": "A-60x60-1.csv",
+    "imagem": "images_client_3/03_A-60x60-1.png",
+    "iteracoes": 3,
+    "tempo": 1.4843,
+    "tamanho": "60x60",
+    "inicio": "2026-06-19 15:13:07",
+    "fim": "2026-06-19 15:13:08",
+    "algoritmo": "cgne"
+  },
+  {
+    "nome": "A-60x60-1.csv",
+    "imagem": "images_client_3/04_A-60x60-1.png",
+    "iteracoes": 3,
+    "tempo": 1.57,
+    "tamanho": "60x60",
+    "inicio": "2026-06-19 15:13:08",
+    "fim": "2026-06-19 15:13:09",
+    "algoritmo": "cgne"
+  },
+  {
+    "nome": "g-30x30-2.csv",
+    "imagem": "images_client_3/05_g-30x30-2.png",
+    "iteracoes": 2,
+    "tempo": 0.8098,
+    "tamanho": "30x30",
+    "inicio": "2026-06-19 15:13:10",
+    "fim": "2026-06-19 15:13:11",
+    "algoritmo": "cgnr"
+  },
+  {
+    "nome": "G-2.csv",
+    "imagem": "images_client_3/06_G-2.png",
+    "iteracoes": 3,
+    "tempo": 2.1845,
+    "tamanho": "60x60",
+    "inicio": "2026-06-19 15:13:09",
+    "fim": "2026-06-19 15:13:11",
+    "algoritmo": "cgne"
+  },
+  {
+    "nome": "G-1.csv",
+    "imagem": "images_client_3/07_G-1.png",
+    "iteracoes": 2,
+    "tempo": 0.99,
+    "tamanho": "60x60",
+    "inicio": "2026-06-19 15:13:11",
+    "fim": "2026-06-19 15:13:12",
+    "algoritmo": "cgnr"
+  },
+  {
+    "nome": "G-1.csv",
+    "imagem": "images_client_3/08_G-1.png",
+    "iteracoes": 2,
+    "tempo": 1.4955,
+    "tamanho": "60x60",
+    "inicio": "2026-06-19 15:13:12",
+    "fim": "2026-06-19 15:13:14",
+    "algoritmo": "cgnr"
+  },
+  {
+    "nome": "g-30x30-2.csv",
+    "imagem": "images_client_3/09_g-30x30-2.png",
+    "iteracoes": 3,
+    "tempo": 1.2022,
+    "tamanho": "30x30",
+    "inicio": "2026-06-19 15:13:13",
+    "fim": "2026-06-19 15:13:14",
+    "algoritmo": "cgne"
+  },
+  {
+    "nome": "A-60x60-1.csv",
+    "imagem": "images_client_3/10_A-60x60-1.png",
+    "iteracoes": 2,
+    "tempo": 1.2381,
+    "tamanho": "60x60",
+    "inicio": "2026-06-19 15:13:15",
+    "fim": "2026-06-19 15:13:16",
+    "algoritmo": "cgnr"
+  },
+  {
+    "nome": "G-1.csv",
+    "imagem": "images_client_3/11_G-1.png",
+    "iteracoes": 3,
+    "tempo": 0.9249,
+    "tamanho": "60x60",
+    "inicio": "2026-06-19 15:13:16",
+    "fim": "2026-06-19 15:13:17",
+    "algoritmo": "cgne"
+  },
+  {
+    "nome": "A-60x60-1.csv",
+    "imagem": "images_client_3/12_A-60x60-1.png",
+    "iteracoes": 2,
+    "tempo": 0.7301,
+    "tamanho": "60x60",
+    "inicio": "2026-06-19 15:13:17",
+    "fim": "2026-06-19 15:13:18",
+    "algoritmo": "cgnr"
+  },
+  {
+    "nome": "g-30x30-1.csv",
+    "imagem": "images_client_3/13_g-30x30-1.png",
+    "iteracoes": 3,
+    "tempo": 0.4363,
+    "tamanho": "30x30",
+    "inicio": "2026-06-19 15:13:18",
+    "fim": "2026-06-19 15:13:18",
+    "algoritmo": "cgne"
+  },
+  {
+    "nome": "G-2.csv",
+    "imagem": "images_client_3/14_G-2.png",
+    "iteracoes": 3,
+    "tempo": 1.7758,
+    "tamanho": "60x60",
+    "inicio": "2026-06-19 15:13:19",
+    "fim": "2026-06-19 15:13:21",
+    "algoritmo": "cgne"
+  },
+  {
+    "nome": "g-30x30-1.csv",
+    "imagem": "images_client_3/15_g-30x30-1.png",
+    "iteracoes": 2,
+    "tempo": 0.3951,
+    "tamanho": "30x30",
+    "inicio": "2026-06-19 15:13:21",
+    "fim": "2026-06-19 15:13:21",
+    "algoritmo": "cgnr"
+  },
+  {
+    "nome": "G-2.csv",
+    "imagem": "images_client_3/16_G-2.png",
+    "iteracoes": 3,
+    "tempo": 1.3502,
+    "tamanho": "60x60",
+    "inicio": "2026-06-19 15:13:20",
+    "fim": "2026-06-19 15:13:21",
+    "algoritmo": "cgne"
+  },
+  {
+    "nome": "G-2.csv",
+    "imagem": "images_client_3/17_G-2.png",
+    "iteracoes": 2,
+    "tempo": 1.3569,
+    "tamanho": "60x60",
+    "inicio": "2026-06-19 15:13:22",
+    "fim": "2026-06-19 15:13:24",
+    "algoritmo": "cgnr"
+  },
+  {
+    "nome": "g-30x30-1.csv",
+    "imagem": "images_client_3/18_g-30x30-1.png",
+    "iteracoes": 2,
+    "tempo": 0.8768,
+    "tamanho": "30x30",
+    "inicio": "2026-06-19 15:13:23",
+    "fim": "2026-06-19 15:13:24",
+    "algoritmo": "cgnr"
+  },
+  {
+    "nome": "G-1.csv",
+    "imagem": "images_client_3/19_G-1.png",
+    "iteracoes": 3,
+    "tempo": 1.0141,
+    "tamanho": "60x60",
+    "inicio": "2026-06-19 15:13:25",
+    "fim": "2026-06-19 15:13:26",
+    "algoritmo": "cgne"
+  },
+  {
+    "nome": "A-30x30-1.csv",
+    "imagem": "images_client_3/20_A-30x30-1.png",
+    "iteracoes": 3,
+    "tempo": 0.1474,
+    "tamanho": "30x30",
+    "inicio": "2026-06-19 15:13:26",
+    "fim": "2026-06-19 15:13:26",
+    "algoritmo": "cgne"
+  },
+  {
+    "nome": "A-30x30-1.csv",
+    "imagem": "images_client_3/21_A-30x30-1.png",
+    "iteracoes": 3,
+    "tempo": 0.2587,
+    "tamanho": "30x30",
+    "inicio": "2026-06-19 15:13:26",
+    "fim": "2026-06-19 15:13:27",
+    "algoritmo": "cgne"
+  },
+  {
+    "nome": "A-60x60-1.csv",
+    "imagem": "images_client_3/22_A-60x60-1.png",
+    "iteracoes": 3,
+    "tempo": 0.8455,
+    "tamanho": "60x60",
+    "inicio": "2026-06-19 15:13:28",
+    "fim": "2026-06-19 15:13:28",
+    "algoritmo": "cgne"
+  },
+  {
+    "nome": "g-30x30-2.csv",
+    "imagem": "images_client_3/23_g-30x30-2.png",
+    "iteracoes": 3,
+    "tempo": 0.9742,
+    "tamanho": "30x30",
+    "inicio": "2026-06-19 15:13:29",
+    "fim": "2026-06-19 15:13:30",
+    "algoritmo": "cgne"
+  },
+  {
+    "nome": "A-30x30-1.csv",
+    "imagem": "images_client_3/24_A-30x30-1.png",
+    "iteracoes": 3,
+    "tempo": 0.8088,
+    "tamanho": "30x30",
+    "inicio": "2026-06-19 15:13:29",
+    "fim": "2026-06-19 15:13:30",
+    "algoritmo": "cgne"
+  },
+  {
+    "nome": "g-30x30-1.csv",
+    "imagem": "images_client_3/25_g-30x30-1.png",
+    "iteracoes": 2,
+    "tempo": 0.4464,
+    "tamanho": "30x30",
+    "inicio": "2026-06-19 15:13:30",
+    "fim": "2026-06-19 15:13:30",
+    "algoritmo": "cgnr"
+  },
+  {
+    "nome": "G-1.csv",
+    "imagem": "images_client_3/26_G-1.png",
+    "iteracoes": 2,
+    "tempo": 0.598,
+    "tamanho": "60x60",
+    "inicio": "2026-06-19 15:13:31",
+    "fim": "2026-06-19 15:13:32",
+    "algoritmo": "cgnr"
+  },
+  {
+    "nome": "G-2.csv",
+    "imagem": "images_client_3/27_G-2.png",
+    "iteracoes": 2,
+    "tempo": 0.8231,
+    "tamanho": "60x60",
+    "inicio": "2026-06-19 15:13:32",
+    "fim": "2026-06-19 15:13:33",
+    "algoritmo": "cgnr"
+  },
+  {
+    "nome": "G-2.csv",
+    "imagem": "images_client_3/28_G-2.png",
+    "iteracoes": 2,
+    "tempo": 0.9009,
+    "tamanho": "60x60",
+    "inicio": "2026-06-19 15:13:34",
+    "fim": "2026-06-19 15:13:35",
+    "algoritmo": "cgnr"
+  },
+  {
+    "nome": "g-30x30-1.csv",
+    "imagem": "images_client_3/29_g-30x30-1.png",
+    "iteracoes": 3,
+    "tempo": 0.367,
+    "tamanho": "30x30",
+    "inicio": "2026-06-19 15:13:35",
+    "fim": "2026-06-19 15:13:35",
+    "algoritmo": "cgne"
+  },
+  {
+    "nome": "A-60x60-1.csv",
+    "imagem": "images_client_3/30_A-60x60-1.png",
+    "iteracoes": 2,
+    "tempo": 1.4765,
+    "tamanho": "60x60",
+    "inicio": "2026-06-19 15:13:35",
+    "fim": "2026-06-19 15:13:37",
+    "algoritmo": "cgnr"
+  },
+  {
+    "nome": "A-60x60-1.csv",
+    "imagem": "images_client_3/31_A-60x60-1.png",
+    "iteracoes": 2,
+    "tempo": 1.1411,
+    "tamanho": "60x60",
+    "inicio": "2026-06-19 15:13:36",
+    "fim": "2026-06-19 15:13:37",
+    "algoritmo": "cgnr"
+  },
+  {
+    "nome": "g-30x30-1.csv",
+    "imagem": "images_client_3/32_g-30x30-1.png",
+    "iteracoes": 3,
+    "tempo": 0.6118,
+    "tamanho": "30x30",
+    "inicio": "2026-06-19 15:13:37",
+    "fim": "2026-06-19 15:13:38",
+    "algoritmo": "cgne"
+  },
+  {
+    "nome": "G-2.csv",
+    "imagem": "images_client_3/33_G-2.png",
+    "iteracoes": 2,
+    "tempo": 0.738,
+    "tamanho": "60x60",
+    "inicio": "2026-06-19 15:13:38",
+    "fim": "2026-06-19 15:13:39",
+    "algoritmo": "cgnr"
+  },
+  {
+    "nome": "g-30x30-2.csv",
+    "imagem": "images_client_3/34_g-30x30-2.png",
+    "iteracoes": 2,
+    "tempo": 0.416,
+    "tamanho": "30x30",
+    "inicio": "2026-06-19 15:13:39",
+    "fim": "2026-06-19 15:13:39",
+    "algoritmo": "cgnr"
+  },
+  {
+    "nome": "G-1.csv",
+    "imagem": "images_client_3/35_G-1.png",
+    "iteracoes": 3,
+    "tempo": 1.026,
+    "tamanho": "60x60",
+    "inicio": "2026-06-19 15:13:39",
+    "fim": "2026-06-19 15:13:40",
+    "algoritmo": "cgne"
+  },
+  {
+    "nome": "A-60x60-1.csv",
+    "imagem": "images_client_3/36_A-60x60-1.png",
+    "iteracoes": 3,
+    "tempo": 1.1536,
+    "tamanho": "60x60",
+    "inicio": "2026-06-19 15:13:40",
+    "fim": "2026-06-19 15:13:41",
+    "algoritmo": "cgne"
+  },
+  {
+    "nome": "A-60x60-1.csv",
+    "imagem": "images_client_3/37_A-60x60-1.png",
+    "iteracoes": 3,
+    "tempo": 0.7806,
+    "tamanho": "60x60",
+    "inicio": "2026-06-19 15:13:41",
+    "fim": "2026-06-19 15:13:42",
+    "algoritmo": "cgne"
+  }
+]

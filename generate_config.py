@@ -23,7 +23,7 @@ for client in CLIENTS:
     for i in range(total_requests):
         nome_g = random.choice(sinais_lista)
         nome_h = SINAIS_MAP[nome_g]
-        delay = round(random.uniform(0.2, 1.5), 2)
+        delay = round(random.uniform(0.1, 0.3), 2)
         
         # Randomize the amplification factor for the gain formula
         fator = round(random.uniform(1.0, 3.0), 4)
