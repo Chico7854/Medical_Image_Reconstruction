@@ -4,7 +4,6 @@ import asyncio
 import threading
 import psutil
 import csv
-import os
 from datetime import datetime
 from fastapi import FastAPI, BackgroundTasks
 from pydantic import BaseModel
@@ -12,7 +11,6 @@ from typing import List, Dict
 
 app = FastAPI()
 
-# Preload system matrices
 H_map = {
     'H-1.csv': np.loadtxt('H/H-1.csv', delimiter=','),
     'H-2.csv': np.loadtxt('H/H-2.csv', delimiter=','),
@@ -20,6 +18,8 @@ H_map = {
 
 resultados_storage: Dict[str, List[dict]] = {}
 processando_count: Dict[str, int] = {}
+# Track if the client has declared it is done sending
+finalizado_flags: Dict[str, bool] = {}
 storage_lock = asyncio.Lock()
 
 class Requisicao(BaseModel):
@@ -29,53 +29,33 @@ class Requisicao(BaseModel):
     algoritmo: str
     client_id: str
 
-# --- BACKGROUND MONITORING ---
-METRICS_FILE = "metrics.csv"
-
-# Global flags to synchronize the stopwatch
+METRICS_FILE = "metrics_py.csv"
 tempo_inicial = None
 cronometro_iniciado = threading.Event()
 
 def monitorar_recursos():
-    """Background thread that sleeps until the first request arrives, then logs system metrics."""
     global tempo_inicial
-    
-    # 1. Wait silently here until the first request triggers the event
     cronometro_iniciado.wait()
     tempo_inicial = time.perf_counter()
     
-    # 2. Initialize CSV file with headers now that the timeline has officially begun
     with open(METRICS_FILE, mode='w', newline='') as f:
         writer = csv.writer(f)
-        writer.writerow([
-            "Tempo_Decorrido_S", 
-            "System_Total_CPU_Percent", 
-            "System_Used_Memory_GB"
-        ])
+        writer.writerow(["Tempo_Decorrido_S", "System_Total_CPU_Percent", "System_Used_Memory_GB"])
     
-    print(f"[MONITOR] First request received! Stopwatch started. Logging to {METRICS_FILE}...")
-    
-    # 3. Continuous clock logging loop
     while True:
         try:
             tempo_decorrido = round(time.perf_counter() - tempo_inicial, 2)
-            
             sys_cpu = psutil.cpu_percent()
             sys_mem = psutil.virtual_memory().used / (1024 * 1024 * 1024)
-            
             with open(METRICS_FILE, mode='a', newline='') as f:
                 writer = csv.writer(f)
                 writer.writerow([tempo_decorrido, sys_cpu, round(sys_mem, 2)])
-                
             time.sleep(0.5)
         except Exception as e:
-            print(f"[MONITOR ERROR] {e}")
             time.sleep(1)
 
-# Start the thread (it will instantly pause and wait at line 12)
 monitor_thread = threading.Thread(target=monitorar_recursos, daemon=True)
 monitor_thread.start()
-# -----------------------------
 
 def cgne(H, g, max_iter=100, epsilon=1e-4):
     inicio = time.time()
@@ -149,38 +129,43 @@ async def processar_reconstrucao_background(req: Requisicao):
             resultados_storage[req.client_id] = []
         resultados_storage[req.client_id].append(resultado)
         processando_count[req.client_id] -= 1
-        
-    print(f"[BACKGROUND] Processado {req.nome} para {req.client_id}")
 
 @app.post("/reconstruir")
 async def reconstruir(req: Requisicao, background_tasks: BackgroundTasks):
-    # Trigger the stopwatch if it hasn't started yet
     if not cronometro_iniciado.is_set():
         cronometro_iniciado.set()
 
     async with storage_lock:
         if req.client_id not in processando_count:
             processando_count[req.client_id] = 0
+            finalizado_flags[req.client_id] = False
         processando_count[req.client_id] += 1
         
     background_tasks.add_task(processar_reconstrucao_background, req)
     return {"status": "recebido"}
 
+# Explicit closing route
+@app.post("/finalizar/{client_id}")
+async def finalizar_cliente(client_id: str):
+    async with storage_lock:
+        finalizado_flags[client_id] = True
+    return {"status": "sinalizado"}
+
 @app.get("/resultados/{client_id}")
 async def obter_resultados(client_id: str):
-    while True:
-        async with storage_lock:
-            if client_id in processando_count and processando_count[client_id] == 0:
-                if client_id in resultados_storage and len(resultados_storage[client_id]) > 0:
-                    break
-        await asyncio.sleep(0.5)
-        
     async with storage_lock:
-        resposta = list(resultados_storage[client_id])
-        del resultados_storage[client_id]
-        del processando_count[client_id]
-        
-    return {"status": "sucesso", "dados": resposta}
+        terminar = False
+        # Only true if sender is done AND background worker thread counts are empty
+        if finalizado_flags.get(client_id, False) and processando_count.get(client_id, 0) == 0:
+            if client_id not in resultados_storage or len(resultados_storage[client_id]) == 0:
+                terminar = True
+            
+        dados = resultados_storage.pop(client_id, [])
+        if terminar:
+            processando_count.pop(client_id, None)
+            finalizado_flags.pop(client_id, None)
+            
+        return {"status": "sucesso", "concluido": terminar, "dados": dados}
 
 if __name__ == "__main__":
     import uvicorn
