@@ -32,38 +32,47 @@ class Requisicao(BaseModel):
 # --- BACKGROUND MONITORING ---
 METRICS_FILE = "metrics.csv"
 
+# Global flags to synchronize the stopwatch
+tempo_inicial = None
+cronometro_iniciado = threading.Event()
+
 def monitorar_recursos():
-    """Background thread that samples CPU/Memory at a fast interval."""
-    pid = os.getpid()
-    processo = psutil.Process(pid)
+    """Background thread that sleeps until the first request arrives, then logs system metrics."""
+    global tempo_inicial
     
-    # Initialize CSV file with headers
+    # 1. Wait silently here until the first request triggers the event
+    cronometro_iniciado.wait()
+    tempo_inicial = time.perf_counter()
+    
+    # 2. Initialize CSV file with headers now that the timeline has officially begun
     with open(METRICS_FILE, mode='w', newline='') as f:
         writer = csv.writer(f)
         writer.writerow([
-            "Timestamp", 
+            "Tempo_Decorrido_S", 
             "System_Total_CPU_Percent", 
             "System_Used_Memory_GB"
         ])
     
+    print(f"[MONITOR] First request received! Stopwatch started. Logging to {METRICS_FILE}...")
+    
+    # 3. Continuous clock logging loop
     while True:
         try:
-            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+            tempo_decorrido = round(time.perf_counter() - tempo_inicial, 2)
             
-            # Global system metrics
             sys_cpu = psutil.cpu_percent()
-            sys_mem = psutil.virtual_memory().used / (1024 * 1024 * 1024)  # Convert to GB
+            sys_mem = psutil.virtual_memory().used / (1024 * 1024 * 1024)
             
             with open(METRICS_FILE, mode='a', newline='') as f:
                 writer = csv.writer(f)
-                writer.writerow([timestamp, sys_cpu, round(sys_mem, 2)])
+                writer.writerow([tempo_decorrido, sys_cpu, round(sys_mem, 2)])
                 
-            time.sleep(0.5)  # High resolution sampling
+            time.sleep(0.5)
         except Exception as e:
             print(f"[MONITOR ERROR] {e}")
             time.sleep(1)
 
-# Start the monitoring thread immediately on server startup
+# Start the thread (it will instantly pause and wait at line 12)
 monitor_thread = threading.Thread(target=monitorar_recursos, daemon=True)
 monitor_thread.start()
 # -----------------------------
@@ -145,6 +154,10 @@ async def processar_reconstrucao_background(req: Requisicao):
 
 @app.post("/reconstruir")
 async def reconstruir(req: Requisicao, background_tasks: BackgroundTasks):
+    # Trigger the stopwatch if it hasn't started yet
+    if not cronometro_iniciado.is_set():
+        cronometro_iniciado.set()
+
     async with storage_lock:
         if req.client_id not in processando_count:
             processando_count[req.client_id] = 0
