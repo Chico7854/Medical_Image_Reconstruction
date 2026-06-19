@@ -30,7 +30,7 @@ condition_variable cv_monitor;
 atomic<bool> cronometro_iniciado{false};
 chrono::time_point<chrono::steady_clock> tempo_inicial;
 
-const string METRICS_FILE = "metrics.csv";
+const string METRICS_FILE = "metrics_cpp.csv";
 
 MatrixXd load_csv(const string& path) {
     vector<vector<double>> data;
