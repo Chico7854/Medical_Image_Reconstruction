@@ -12,21 +12,28 @@ SERVIDOR = 'http://localhost:8000'
 
 def salvar_imagem(imagem_lista, path):
     imagem = np.array(imagem_lista)
-    
-    # Create an isolated figure and axes instance (Thread-safe)
     fig = Figure()
     ax = fig.subplots()
-    
     ax.imshow(imagem, cmap='gray')
     ax.axis('off')
-    
-    # Save using the specific figure canvas instance
     fig.savefig(path, bbox_inches='tight', pad_inches=0)
 
-def enviar_sinal(nome_g, nome_h, algoritmo, client_id):
+def aplicar_ganho_sinal(g, fator):
+    S = len(g)
+    # Generate 1-based array indices for 'l' to match the formula requirements
+    for i in range(1, S + 1):
+        gamma = 100 + ((1/20) * i * np.sqrt(i))
+    
+    return g * gamma * fator
+
+def enviar_sinal(nome_g, nome_h, algoritmo, client_id, fator):
     g = np.loadtxt("sinais/" + nome_g)
+    
+    # Process signal transformation via the formula
+    g_modificado = aplicar_ganho_sinal(g, fator)
+
     payload = {
-        'sinal': g.tolist(),
+        'sinal': g_modificado.tolist(), # Send modified array
         'h': nome_h,
         'nome': nome_g,
         'algoritmo': algoritmo,
@@ -43,24 +50,21 @@ def executar_pipeline_cliente(client_id, tasks):
     
     print(f"[{client_id}] Starting thread. Total tasks: {total}\n")
     
-    # 1. Fire-and-forget loop
     for idx, task in enumerate(tasks):
         nome_g = task["nome_g"]
         nome_h = task["nome_h"]
         delay = task["delay"]
+        fator = task["fator"] # Extracted from configuration blueprint
         
-        # Dynamically randomize the algorithm per request
         algoritmo = random.choice(['cgne', 'cgnr'])
         
-        print(f"[{client_id}] (Progress {idx+1}/{total}) Sending {nome_g} via {algoritmo.upper()}...")
-        enviar_sinal(nome_g, nome_h, algoritmo, client_id)
+        print(f"[{client_id}] (Progress {idx+1}/{total}) Sending {nome_g} via {algoritmo.upper()} (Gain Factor: {fator})...")
+        enviar_sinal(nome_g, nome_h, algoritmo, client_id, fator)
         time.sleep(delay)
 
-    # 2. Long polling loop waiting for back-end processing
     print(f"\n[{client_id}] Queue processed. Waiting for server computations...")
     resposta_servidor = requests.get(f"{SERVIDOR}/resultados/{client_id}").json()
 
-    # 3. Extract completed matrices
     if resposta_servidor.get("status") == "sucesso":
         for idx, resultado in enumerate(resposta_servidor["dados"]):
             path = f"{output_dir}/{idx:02d}_{resultado['nome'].replace('.csv', '')}.png"
@@ -78,7 +82,6 @@ def executar_pipeline_cliente(client_id, tasks):
             })
         print(f"[{client_id}] Finished completely. Outputs written to ./{output_dir}")
 
-    # Write report file specific to this thread
     with open(f'relatorio_{client_id}.json', 'w') as f:
         json.dump(relatorio, f, indent=2)
 

@@ -1,11 +1,9 @@
 import json
 import random
 
-# Configuration settings
 CONFIG_FILE = "config.json"
 CLIENTS = ["client_1", "client_2", "client_3"]
 
-# Available signals and their corresponding H matrices
 SINAIS_MAP = {
     'G-1.csv':       'H-1.csv',
     'G-2.csv':       'H-1.csv',
@@ -19,30 +17,27 @@ sinais_lista = list(SINAIS_MAP.keys())
 config_data = {}
 
 for client in CLIENTS:
-    # Randomize the total number of requests for this client (between 30 and 50)
     total_requests = random.randint(30, 50)
     client_tasks = []
     
     for i in range(total_requests):
-        # Randomize the signal choice
         nome_g = random.choice(sinais_lista)
         nome_h = SINAIS_MAP[nome_g]
-        
-        # Randomize a unique delay value for this specific request
         delay = round(random.uniform(0.2, 1.5), 2)
+        
+        # Randomize the amplification factor for the gain formula
+        fator = round(random.uniform(1.0, 3.0), 4)
         
         client_tasks.append({
             "nome_g": nome_g,
             "nome_h": nome_h,
-            "delay": delay
+            "delay": delay,
+            "fator": fator  # Added parameter
         })
         
     config_data[client] = client_tasks
 
-# Save to config.json
 with open(CONFIG_FILE, 'w') as f:
     json.dump(config_data, f, indent=2)
 
-print(f"Successfully generated {CONFIG_FILE}!")
-for client, tasks in config_data.items():
-    print(f"  → {client}: {len(tasks)} requests configured.")
+print(f"Successfully generated {CONFIG_FILE} with gain parameters!")
