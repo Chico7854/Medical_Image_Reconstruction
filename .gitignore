@@ -10,3 +10,5 @@ __pycache__/
 metrics_py.csv
 metrics_cpp.csv
 server
+!results/
+!results/**
