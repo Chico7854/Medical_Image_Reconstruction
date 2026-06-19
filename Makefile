@@ -7,4 +7,4 @@ server: server.cpp
 	$(CXX) $(CXXFLAGS) server.cpp -o server
 
 clean:
-	rm -rf metrics_py.csv metrics_cpp.csv relatorio_client* images_client* server
+	rm -rf metrics_py.csv metrics_cpp.csv relatorio_client* images_client* server server_cache
