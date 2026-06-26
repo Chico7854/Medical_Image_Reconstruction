@@ -144,7 +144,6 @@ async def reconstruir(req: Requisicao, background_tasks: BackgroundTasks):
     background_tasks.add_task(processar_reconstrucao_background, req)
     return {"status": "recebido"}
 
-# Explicit closing route
 @app.post("/finalizar/{client_id}")
 async def finalizar_cliente(client_id: str):
     async with storage_lock:

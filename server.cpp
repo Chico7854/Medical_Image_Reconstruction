@@ -18,7 +18,6 @@
 using namespace std;
 using namespace Eigen;
 
-// Read-only after main initialization (Safe to access without locks across threads)
 unordered_map<string, MatrixXd> H_map;
 
 unordered_map<string, vector<string>> resultados_storage;
@@ -208,7 +207,6 @@ void processar_reconstrucao_background(string sinal_str, string h_key, string no
     VectorXd g(json_arr.size());
     for (size_t i = 0; i < json_arr.size(); ++i) g(i) = json_arr[i].d();
 
-    // FIX: Look up by reference. No lock needed as H_map is read-only now.
     auto it = H_map.find(h_key);
     if (it == H_map.end()) {
         lock_guard<mutex> lock(storage_mutex);
@@ -317,7 +315,6 @@ int main() {
             processando_count[client_id]++;
         }
 
-        // FIX: Moved `sinal_str` into the thread constructor to avoid unnecessary heap duplication
         thread worker(processar_reconstrucao_background, move(sinal_str), move(h), move(nome), move(algoritmo), move(client_id));
         worker.detach();
 
